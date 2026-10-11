@@ -1,0 +1,25 @@
+{
+  "name": "fixtrail",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Apartment maintenance tracker: every complaint gets an owner, a deadline and an escalation path.",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "npm run build -w shared && concurrently -n api,web -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w shared && npm run build -w server && npm run build -w client",
+    "test": "npm run build -w shared && npm run test -w server",
+    "typecheck": "npm run build -w shared && npm run typecheck -w server && npm run typecheck -w client",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "license": "UNLICENSED"
+}

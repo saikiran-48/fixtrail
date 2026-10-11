@@ -1,0 +1,19 @@
+# Local MongoDB for development and tests. Data persists in a Docker volume,
+# so restarting the container does not wipe your test accounts or tickets.
+#
+#   docker compose up -d        # start
+#   docker compose down         # stop (keeps data)
+#
+# Development database:  mongodb://localhost:27017/fixtrail
+# Test database:         mongodb://localhost:27017/fixtrail_test
+services:
+  mongo:
+    image: mongo:7
+    ports:
+      - '27017:27017'
+    volumes:
+      - fixtrail-mongo:/data/db
+    restart: unless-stopped
+
+volumes:
+  fixtrail-mongo:
